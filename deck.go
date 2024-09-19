@@ -3,8 +3,24 @@ package main
 import "fmt"
 
 type deck []string
-type card string
 
+func newDeck() deck {
+	cards := deck{}
+
+	cardSuits := []string{"Spades", "Diamonds", "Hearts", "Clubs"}
+	cardValues := []string{"Ace", "King", "Queen", "Jack", "Ten", "Nine", "Eight", "Seven", "Six", "Five", "Four", "Three", "Two"}
+
+	for _, suit := range cardSuits {
+		for _, value := range cardValues {
+			cards = append(cards, value+" of "+suit)
+
+		}
+	}
+
+	return cards
+}
+
+// Receiver
 func (d deck) print() {
 	for i, card := range d {
 		fmt.Println(i, card)
@@ -12,7 +28,6 @@ func (d deck) print() {
 	}
 }
 
-func (c card) print() {
-	fmt.Println(c)
-
+func deal(d deck, handSize int) (deck, deck) {
+	return d[:handSize], d[handSize:]
 }
